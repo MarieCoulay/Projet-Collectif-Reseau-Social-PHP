@@ -77,7 +77,7 @@
                 while ($post = $lesInformations->fetch_assoc()) //fetch_assoc => associe le tableau nouvellement créé à une variable $post
                 {
                 
-                    echo "<pre>" . print_r($post, 1) . "</pre>";
+                    // echo "<pre>" . print_r($post, 1) . "</pre>";
                     ?>
                     <article>
                         <h3>
