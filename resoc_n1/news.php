@@ -80,19 +80,7 @@
 
                 // echo "<pre>" . print_r($post, 1) . "</pre>";
             ?>
-                <article>
-                    <h3>
-                        <time><?php echo $post['created'] ?></time>
-                    </h3>
-                    <address><?php echo $post['author_name'] ?></address>
-                    <div>
-                        <p><?php echo $post['content'] ?></p>
-                    </div>
-                    <footer>
-                        <small>♥ <?php echo $post['like_number'] ?></small>
-                        <a href="">#<?php echo $post['taglist'] ?></a>,
-                    </footer>
-                </article>
+                <?php include "article.php"; ?>
             <?php
                 // avec le <?php ci-dessus on retourne en mode php 
             } // cette accolade ferme et termine la boucle while ouverte avant.
