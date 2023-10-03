@@ -40,7 +40,7 @@
                     <h3>
                         <time datetime='2020-02-01 11:12:13' >31 février 2010 à 11h12</time>
                     </h3>
-                    <address>par AreTirer</address>
+                    <address >par AreTirer</address>
                     <div>
                         <p>Ceci est un paragraphe</p>
                         <p>Ceci est un autre paragraphe</p>
@@ -66,9 +66,10 @@
                  */
 
                 // Etape 1: Ouvrir une connexion avec la base de donnée.
+                //localhost=>nom du serveur; root/root=>num user + mdp; socialnetwork=> base de données
                 $mysqli = new mysqli("localhost", "root", "root", "socialnetwork");
                 //verification
-                if ($mysqli->connect_errno)
+                if ($mysqli->connect_errno) // Si absence d'erreur retourne 0 (false) sinon retourne le code erreur
                 {
                     echo "<article>";
                     echo("Échec de la connexion : " . $mysqli->connect_error);
@@ -81,10 +82,7 @@
                 // cette requete vous est donnée, elle est complexe mais correcte, 
                 // si vous ne la comprenez pas c'est normal, passez, on y reviendra
                 $laQuestionEnSql = "
-                    SELECT posts.content,
-                    posts.created,
-                    users.alias as author_name,  
-                    count(likes.id) as like_number,  
+                    SELECT posts.content, posts.created, users.alias as author_name, count(likes.id) as like_number,  
                     GROUP_CONCAT(DISTINCT tags.label) AS taglist 
                     FROM posts
                     JOIN users ON  users.id=posts.user_id
@@ -107,7 +105,7 @@
 
                 // Etape 3: Parcourir ces données et les ranger bien comme il faut dans du html
                 // NB: à chaque tour du while, la variable post ci dessous reçois les informations du post suivant.
-                while ($post = $lesInformations->fetch_assoc())
+                while ($post = $lesInformations->fetch_assoc()) //fetch_assoc => associe le tableau nouvellement créé à une variable $post
                 {
                     //la ligne ci-dessous doit etre supprimée mais regardez ce 
                     //qu'elle affiche avant pour comprendre comment sont organisées les information dans votre 
@@ -123,13 +121,13 @@
                         <h3>
                             <time><?php echo $post['created'] ?></time>
                         </h3>
-                        <address>AREMPLACER</address>
+                        <address><?php echo $post['author_name'] ?></address>
                         <div>
-                            <p>AREMPLACER</p>
+                            <p><?php echo $post['content'] ?></p>
                         </div>
                         <footer>
-                            <small>♥ AREMPLACER </small>
-                            <a href="">AREMPLACER</a>,
+                            <small>♥ <?php echo $post['like_number'] ?></small>
+                            <a href="">#<?php echo $post['taglist'] ?></a>,
                         </footer>
                     </article>
                     <?php
