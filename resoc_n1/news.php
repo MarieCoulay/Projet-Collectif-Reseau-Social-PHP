@@ -37,7 +37,7 @@
                 <?php
                 // Etape 1: Ouvrir une connexion avec la base de donnée.
                 //localhost=>nom du serveur; root/root=>num user + mdp; socialnetwork=> base de données
-                $mysqli = new mysqli("localhost", "root", "root", "socialnetwork");
+                include "connect_database.php";
                 //verification
                 if ($mysqli->connect_errno) // Si absence d'erreur retourne 0 (false) sinon retourne le code erreur
                 {
