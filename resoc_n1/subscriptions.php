@@ -19,7 +19,7 @@
                 <p>
                     Sur cette page vous trouverez la liste des personnes dont
                     l'utilisatrice
-                    (n° <?php echo intval($_GET['user_id']) ?>)
+                    n° <?php echo intval($_GET['user_id']) ?>
                     suit les messages
                 </p>
 
@@ -40,8 +40,7 @@
                     GROUP BY users.id
                     ";
             include "query_database.php";
-            // Etape 4: à vous de jouer
-            //@todo: faire la boucle while de parcours des abonnés et mettre les bonnes valeurs ci dessous 
+            // Etape 4: boucle while de parcours des abonnés  
             ?>
             <?php
               while ($userId = $lesInformations->fetch_assoc())
