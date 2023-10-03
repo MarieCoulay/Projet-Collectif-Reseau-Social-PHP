@@ -16,10 +16,10 @@
         <aside>
             <img src="user.jpg" alt="Portrait de l'utilisatrice" />
             <section>
-                <h3>Présentation</h3>
-                <p>Sur cette page vous trouverez la liste des personnes dont
+                <p>
+                    Sur cette page vous trouverez la liste des personnes dont
                     l'utilisatrice
-                    n° <?php echo intval($_GET['user_id']) ?>
+                    (n° <?php echo intval($_GET['user_id']) ?>)
                     suit les messages
                 </p>
 
@@ -43,11 +43,21 @@
             // Etape 4: à vous de jouer
             //@todo: faire la boucle while de parcours des abonnés et mettre les bonnes valeurs ci dessous 
             ?>
-            <article>
+            <?php
+              while ($userId = $lesInformations->fetch_assoc())
+            {
+
+                // echo "<pre>" . print_r($userId, 1) . "</pre>";
+            ?>
+                <article>
                 <img src="user.jpg" alt="blason" />
-                <h3>Alexandra</h3>
-                <p>id:654</p>
-            </article>
+                <h3><?php echo $userId['alias'] ?></h3>
+                <p>id:<?php echo $userId['id'] ?></p>
+                </article>
+            <?php
+            } 
+            ?>
+            
         </main>
     </div>
 </body>
