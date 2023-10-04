@@ -30,7 +30,7 @@ session_start();
                 /**
                  * BD
                  */
-                $mysqli = new mysqli("localhost", "root", "root", "socialnetwork_tests");
+                include "connect_database.php";
                 /**
                  * Récupération de la liste des auteurs
                  */
@@ -82,7 +82,7 @@ session_start();
                 }
                 ?>
                 <form action="usurpedpost.php" method="post">
-                    <input type='hidden' name='???' value='achanger'>
+                    <!-- <input type='hidden' name='???' value='achanger'> -->
                     <dl>
                         <dt><label for='auteur'>Auteur</label></dt>
                         <dd><select name='auteur'>

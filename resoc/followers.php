@@ -37,25 +37,21 @@
                     WHERE followers.followed_user_id='$userId'
                     GROUP BY users.id
                     ";
-            include "query_database.php";
-            // Etape 4: à vous de jouer
-            //@todo: faire la boucle while de parcours des abonnés et mettre les bonnes valeurs ci dessous 
-            ?>
+            include "query_database.php";            ?>
             <?php
-              while ($userId = $lesInformations->fetch_assoc())
-            {
+            while ($userId = $lesInformations->fetch_assoc()) {
 
                 // echo "<pre>" . print_r($userId, 1) . "</pre>";
             ?>
-                 <article>
-                <img src="user.jpg" alt="blason" />
-                <h3><a href="wall.php?user_id=<?php echo $userId['id'] ?>"><?php echo $userId['alias'] ?></a></h3>
-                <p>id:<?php echo $userId['id'] ?></p>
-            </article>
+                <article>
+                    <img src="user.jpg" alt="blason" />
+                    <h3><a href="wall.php?user_id=<?php echo $userId['id'] ?>"><?php echo $userId['alias'] ?></a></h3>
+                    <p>id:<?php echo $userId['id'] ?></p>
+                </article>
             <?php
-            } 
+            }
             ?>
-           
+
         </main>
     </div>
 </body>
