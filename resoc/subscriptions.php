@@ -33,7 +33,7 @@
             include "connect_database.php";
             // Etape 3: récupérer le nom de l'utilisateur
             $laQuestionEnSql = "
-                    SELECT users.* 
+                    SELECT users.*
                     FROM followers 
                     LEFT JOIN users ON users.id=followers.followed_user_id 
                     WHERE followers.following_user_id='$userId'
@@ -50,7 +50,7 @@
             ?>
                 <article>
                 <img src="user.jpg" alt="blason" />
-                <h3><?php echo $userId['alias'] ?></h3>
+                <h3><a href="wall.php?user_id=<?php echo $userId['id'] ?>"><?php echo $userId['alias'] ?></a></h3>
                 <p>id:<?php echo $userId['id'] ?></p>
                 </article>
             <?php
