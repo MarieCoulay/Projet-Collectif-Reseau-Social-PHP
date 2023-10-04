@@ -31,7 +31,7 @@
             include "connect_database.php";
             // Etape 3: récupérer le nom de l'utilisateur
             $laQuestionEnSql = "
-                    SELECT users.*
+                    SELECT users.*, users.id as userId
                     FROM followers
                     LEFT JOIN users ON users.id=followers.following_user_id
                     WHERE followers.followed_user_id='$userId'

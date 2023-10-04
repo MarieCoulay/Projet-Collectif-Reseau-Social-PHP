@@ -55,7 +55,7 @@
              * Etape 3: récupérer tous les messages avec un mot clé donné
              */
             $laQuestionEnSql = "
-                    SELECT posts.content,
+                    SELECT posts.content, users.id as userId,
                     posts.created,
                     users.alias as author_name,  
                     count(likes.id) as like_number,  
