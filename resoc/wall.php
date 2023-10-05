@@ -1,3 +1,6 @@
+<?php
+include "session.php"
+?>
 <!doctype html>
 <html lang="fr">
 
@@ -21,7 +24,7 @@
          * Documentation : https://www.php.net/manual/fr/reserved.variables.get.php
          * ... mais en résumé c'est une manière de passer des informations à la page en ajoutant des choses dans l'url
          */
-        $userId = intval($_GET['user_id']);
+        //$userId = intval($_GET['user_id']);
         ?>
         <?php
         include "connect_database.php";

@@ -1,3 +1,6 @@
+<?php
+include "session.php"
+?>
 <!doctype html>
 <html lang="fr">
 
@@ -14,9 +17,10 @@
     </header>
     <div id="wrapper">
         <?php
-        
+
         // Etape 1: Le mur concerne un utilisateur en particulier
-        $userId = intval($_GET['user_id']);
+        //$userId = intval($_GET['user_id']);
+        $userId = intval($userId);
         ?>
         <?php
         /**
@@ -72,14 +76,13 @@
             }
             ?>
             <?php
-            
-            while ($post = $lesInformations->fetch_assoc()) 
-            {
-                  // echo "<pre>" . print_r($post, 1) . "</pre>";
+
+            while ($post = $lesInformations->fetch_assoc()) {
+                // echo "<pre>" . print_r($post, 1) . "</pre>";
             ?>
-            <?php include "article.php"; ?>
+                <?php include "article.php"; ?>
             <?php
-            } 
+            }
             ?>
 
 

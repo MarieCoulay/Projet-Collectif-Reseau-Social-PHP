@@ -1,3 +1,6 @@
+<?php
+include "session.php"
+?>
 <!doctype html>
 <html lang="fr">
 
@@ -43,20 +46,19 @@
             // Etape 4: boucle while de parcours des abonnés  
             ?>
             <?php
-              while ($userId = $lesInformations->fetch_assoc())
-            {
+            while ($userId = $lesInformations->fetch_assoc()) {
 
                 // echo "<pre>" . print_r($userId, 1) . "</pre>";
             ?>
                 <article>
-                <img src="user.jpg" alt="blason" />
-                <h3><a href="wall.php?user_id=<?php echo $userId['id'] ?>"><?php echo $userId['alias'] ?></a></h3>
-                <p>id:<?php echo $userId['id'] ?></p>
+                    <img src="user.jpg" alt="blason" />
+                    <h3><a href="wall.php?user_id=<?php echo $userId['id'] ?>"><?php echo $userId['alias'] ?></a></h3>
+                    <p>id:<?php echo $userId['id'] ?></p>
                 </article>
             <?php
-            } 
+            }
             ?>
-            
+
         </main>
     </div>
 </body>
