@@ -17,7 +17,7 @@ include "session.php"
     </header>
     <div id="wrapper">
         <aside>
-            <img src="user.jpg" alt="Portrait de l'utilisatrice" />
+            <img src="user.png" alt="Portrait de l'utilisatrice" />
             <section>
                 <p>
                     Sur cette page vous trouverez la liste des personnes dont
