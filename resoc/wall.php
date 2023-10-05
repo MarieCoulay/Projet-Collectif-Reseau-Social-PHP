@@ -39,7 +39,7 @@ include "session.php"
             $user = $lesInformations->fetch_assoc();
             // echo "<pre>" . print_r($user, 1) . "</pre>";
             ?>
-            <img src="user.jpg" alt="Portrait de l'utilisatrice" />
+            <img src="user.png" alt="Portrait de l'utilisatrice" />
             <section>
                 <p>Sur cette page vous trouverez tous les message de l'utilisatrice : <?php echo $user['alias'] ?>
                     (n°<?php echo $userId ?>)

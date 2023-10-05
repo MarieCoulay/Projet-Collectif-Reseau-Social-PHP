@@ -17,7 +17,7 @@ include "session.php"
     </header>
     <div id="wrapper">
         <aside>
-            <img src="user.jpg" alt="Portrait de l'utilisatrice" />
+            <img src="user.png" alt="Portrait de l'utilisatrice" />
             <section>
                 <h3>Présentation</h3>
                 <p>Sur cette page vous trouverez la liste des personnes qui
@@ -47,7 +47,7 @@ include "session.php"
                 // echo "<pre>" . print_r($userId, 1) . "</pre>";
             ?>
                 <article>
-                    <img src="user.jpg" alt="blason" />
+                    <img src="user.png" alt="blason" />
                     <h3><a href="wall.php?user_id=<?php echo $user_id['id'] ?>"><?php echo $user_id['alias'] ?></a></h3>
                     <p>id:<?php echo $user_id['id'] ?></p>
                 </article>
