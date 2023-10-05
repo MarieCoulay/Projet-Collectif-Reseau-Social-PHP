@@ -28,13 +28,11 @@ include "session.php"
         </aside>
         <main class='contacts'>
             <?php
-            // Etape 1: récupérer l'id de l'utilisateur
-            $userId = intval($userId);
 
-            // Etape 2: se connecter à la base de donnée
+            // Etape 1: se connecter à la base de donnée
             include "connect_database.php";
 
-            // Etape 3: récupérer le nom de l'utilisateur
+            // Etape 2: récupérer le nom de l'utilisateur
             $laQuestionEnSql = "
                     SELECT users.*, users.id as userId
                     FROM followers
