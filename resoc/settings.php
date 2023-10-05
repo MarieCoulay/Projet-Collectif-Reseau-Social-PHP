@@ -28,22 +28,8 @@ include "session.php"
         </aside>
         <main>
             <?php
-            /**
-             * Etape 1: Les paramètres concernent une utilisatrice en particulier
-             * La première étape est donc de trouver quel est l'id de l'utilisatrice
-             * Celui ci est indiqué en parametre GET de la page sous la forme user_id=...
-             * Documentation : https://www.php.net/manual/fr/reserved.variables.get.php
-             * ... mais en résumé c'est une manière de passer des informations à la page en ajoutant des choses dans l'url
-             */
-            $userId = intval($_GET['user_id']);
-
-            /**
-             * Etape 2: se connecter à la base de donnée
-             */
             include "connect_database.php";
-            /**
-             * Etape 3: récupérer le nom de l'utilisateur
-             */
+
             $laQuestionEnSql = "
                     SELECT users.*, 
                     count(DISTINCT posts.id) as totalpost, 
@@ -62,7 +48,6 @@ include "session.php"
             }
             $user = $lesInformations->fetch_assoc();
 
-            // echo "<pre>" . print_r($user, 1) . "</pre>";
             ?>
             <article class='parameters'>
                 <h3>Mes paramètres</h3>
