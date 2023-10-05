@@ -17,27 +17,14 @@ include "session.php"
     </header>
     <div id="wrapper">
         <?php
-        /**
-         * Etape 1: Le mur concerne un utilisateur en particulier
-         * La première étape est donc de trouver quel est l'id de l'utilisateur
-         * Celui ci est indiqué en parametre GET de la page sous la forme user_id=...
-         * Documentation : https://www.php.net/manual/fr/reserved.variables.get.php
-         * ... mais en résumé c'est une manière de passer des informations à la page en ajoutant des choses dans l'url
-         */
-        ?>
-        <?php
         include "connect_database.php";
         ?>
 
         <aside>
             <?php
-            /**
-             * Etape 3: récupérer le nom de l'utilisateur
-             */
             $laQuestionEnSql = "SELECT * FROM users WHERE id= '$userId'";
             include "query_database.php";
             $user = $lesInformations->fetch_assoc();
-            // echo "<pre>" . print_r($user, 1) . "</pre>";
             ?>
             <img src="user.png" alt="Portrait de l'utilisatrice" />
             <section>
@@ -48,9 +35,7 @@ include "session.php"
         </aside>
         <main>
             <?php
-            /**
-             * Etape 3: récupérer tous les messages de l'utilisatrice
-             */
+            // génère le mur de l'utilisateur
             $laQuestionEnSql = "
                     SELECT posts.content, posts.created, users.alias as author_name, users.id as userId,
                     COUNT(likes.id) as like_number, GROUP_CONCAT(DISTINCT tags.label) AS taglist 
@@ -68,15 +53,37 @@ include "session.php"
                 echo ("Échec de la requete : " . $mysqli->error);
             }
 
-            /**
-             * Etape 4: Parcourir les messsages et remplir correctement le HTML avec les bonnes valeurs php
-             */
             while ($post = $lesInformations->fetch_assoc()) {
-                // echo "<pre>" . print_r($post, 1) . "</pre>";
             ?>
                 <?php include "article.php"; ?>
-
             <?php } ?>
+
+            <!-- Ajout d'un post sur le mur -->
+            <?php $enCoursDeTraitement = isset($userId);
+            if ($enCoursDeTraitement) {
+                echo "<pre>" . print_r($_POST, 1) . "</pre>";
+                $postContent = $_POST['message'];
+                $postContent = $mysqli->real_escape_string($postContent);
+
+                $lInstructionSql = "INSERT INTO posts(id, user_id, content, created)
+            VALUES (NULL, $userId, '$postContent', NOW());";
+
+                $ok = $mysqli->query($lInstructionSql);
+                if (!$ok) {
+                    echo "Impossible d'ajouter le message: " . $mysqli->error;
+                } else {
+                    echo "Message posté";
+                }
+            }
+            ?>
+            <!-- Bloc d'input du post à ajouter -->
+            <form action="wall.php" method="post">
+                <dl>
+                    <dt><label for='message'>Message</label></dt>
+                    <dd><textarea name='message'></textarea></dd>
+                </dl>
+                <input type='submit'>
+            </form>
         </main>
     </div>
 </body>

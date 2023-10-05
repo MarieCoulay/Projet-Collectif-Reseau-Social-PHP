@@ -62,18 +62,11 @@ include "session.php"
                     // pour éviter les injection sql : https://www.w3schools.com/sql/sql_injection.asp
                     $authorId = intval($mysqli->real_escape_string($authorId));
                     $postContent = $mysqli->real_escape_string($postContent);
+
                     //Etape 4 : construction de la requete
-                    // $lInstructionSql = "INSERT INTO posts "
-                    //     . "(id, user_id, content, created, permalink, post_id) "
-                    //     . "VALUES (NULL, "
-                    //     . $authorId . ", "
-                    //     . "'" . $postContent . "', "
-                    //     . "NOW(),"
-                    //     . "'', "
-                    //     . "NULL);";
                     $lInstructionSql = "INSERT INTO posts(id, user_id, content, created)
                         VALUES (NULL, $authorId, '$postContent', NOW());";
-                    //echo $lInstructionSql;
+
                     // Etape 5 : execution
                     $ok = $mysqli->query($lInstructionSql);
                     if (!$ok) {
