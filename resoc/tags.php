@@ -45,7 +45,7 @@ include "session.php"
             include "query_database.php";
             while ($tag = $lesInformations->fetch_assoc()) {
             ?>
-                <li><a href="tags.php?tag_id=<?php echo $tag['id'] ?>"><?php echo $tag['label'] ?>></li>
+                <li><a href="tags.php?tag_id=<?php echo $tag['id'] ?>"><?php echo $tag['label'] ?></li>
             <?php } ?>
 
 
