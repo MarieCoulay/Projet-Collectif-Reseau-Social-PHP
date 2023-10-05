@@ -60,7 +60,6 @@ include "session.php"
                         echo "La connexion a échouée. ";
                     } else {
                         echo "Votre connexion est un succès : " . $user['alias'] . ".";
-                        echo session_id();
 
                         // Etape 7 : Se souvenir que l'utilisateur s'est connecté pour la suite
                         // documentation: https://www.php.net/manual/fr/session.examples.basic.php

@@ -34,21 +34,22 @@ include "session.php"
         ?>
 
         <aside>
+            <img src="user.jpg" alt="Portrait de l'utilisatrice" />
+            <p>Mots-clés populaires:</p>
+
             <?php
             /**
              * Etape 3: récupérer le nom du mot-clé
              */
-            $laQuestionEnSql = "SELECT * FROM tags WHERE id= '$tagId' ";
+            $laQuestionEnSql = "SELECT label, id FROM tags"; //WHERE id= '$tagId' 
             include "query_database.php";
-            $tag = $lesInformations->fetch_assoc();
-            // echo "<pre>" . print_r($tag, 1) . "</pre>";
+            while ($tag = $lesInformations->fetch_assoc()) {
             ?>
-            <img src="user.jpg" alt="Portrait de l'utilisatrice" />
+                <li><a href="tags.php?tag_id=<?php echo $tag['id'] ?>"><?php echo $tag['label'] ?>></li>
+            <?php } ?>
+
+
             <section>
-                <p>Sur cette page vous trouverez les derniers messages comportant
-                    le mot-clé <?php echo $tag['label'] ?>
-                    (n° <?php echo $tagId ?>)
-                </p>
 
             </section>
         </aside>
