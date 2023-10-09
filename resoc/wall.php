@@ -32,8 +32,13 @@ include "session.php"
                     (n°<?php echo $userId ?>)
                 </p>
             </section>
-            <form action="wall.php" method="post">
-            <input type='submit'>Follow</input>
+            <?php 
+            $connectedUser = $_SESSION['connected_id'];
+            $requestFollow = "INSERT INTO followers(id, followed_user_id, following_user_id) VALUES (NULL, '$userId', '$connectedUser');";
+            $lesInformationsFollow = $mysqli->query($requestFollow);
+            ?>
+            <form method="post" action="wall.php?user_id=<?php echo $followerId ?>">
+                <button type=submit >S'abonner</button>
             </form>
         </aside>
         <main>
