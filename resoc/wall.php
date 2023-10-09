@@ -32,6 +32,9 @@ include "session.php"
                     (n°<?php echo $userId ?>)
                 </p>
             </section>
+            <form action="wall.php" method="post">
+            <input type='submit'>Follow</input>
+            </form>
         </aside>
         <main>
             <?php

@@ -60,12 +60,14 @@ include "session.php"
                         echo "La connexion a échouée. ";
                     } else {
                         echo "Votre connexion est un succès : " . $user['alias'] . ".";
+                        header("refresh: 0");
 
                         // Etape 7 : Se souvenir que l'utilisateur s'est connecté pour la suite
                         // documentation: https://www.php.net/manual/fr/session.examples.basic.php
                         $_SESSION['connected_id'] = $user['id'];
                     }
                 }
+
                 ?>
                 <form action="login.php" method="post">
                     <input type='hidden' name='???' value='achanger'>
