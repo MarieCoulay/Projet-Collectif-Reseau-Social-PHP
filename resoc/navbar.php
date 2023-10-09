@@ -9,10 +9,24 @@ include "session.php"
     <a href="tags.php">Mots-clés</a>
 </nav>
 <nav id="user">
+    <?php
+    if (!$userId) {
+    ?>
+        <a href="#">Profil</a>
+        <ul>
+            <li><a href="login.php">Paramètres</a></li>
+            <li><a href="login.php">Mes suiveurs</a></li>
+            <li><a href="login.php">Mes abonnements</a></li>
+        </ul>
+</nav>
+<?php } else {
+?>
     <a href="#">Profil</a>
     <ul>
         <li><a href="settings.php?user_id=<?php echo $userId ?>">Paramètres</a></li>
         <li><a href="followers.php?user_id=<?php echo $userId ?>">Mes suiveurs</a></li>
         <li><a href="subscriptions.php?user_id=<?php echo $userId ?>">Mes abonnements</a></li>
+        <li><a href="logout.php">Deconnexion</a></li>
     </ul>
-</nav>
+    </nav>
+<?php } ?>
