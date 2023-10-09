@@ -60,10 +60,11 @@ include "session.php"
 
             <!-- Ajout d'un post sur le mur -->
             <?php $enCoursDeTraitement = isset($userId);
-            if ($enCoursDeTraitement) {
+            if ($enCoursDeTraitement && isset($_POST['message']) && !empty($_POST['message'])) {
                 echo "<pre>" . print_r($_POST, 1) . "</pre>";
                 $postContent = $_POST['message'];
                 $postContent = $mysqli->real_escape_string($postContent);
+                header("refresh: 0");
 
                 $lInstructionSql = "INSERT INTO posts(id, user_id, content, created)
             VALUES (NULL, $userId, '$postContent', NOW());";
@@ -82,7 +83,7 @@ include "session.php"
                     <dt><label for='message'>Message</label></dt>
                     <dd><textarea name='message'></textarea></dd>
                 </dl>
-                <input type='submit'>
+                <input type='submit' onchange="location.reload()">
             </form>
         </main>
     </div>

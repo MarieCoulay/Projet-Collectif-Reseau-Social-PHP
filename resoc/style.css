@@ -13,7 +13,7 @@ a:hover {
 }
 
 body>header {
-    background-color: #fff;
+    background-color: #ffffff;
     display: flex;
     width: 80em;
     margin: 0 auto 2em auto;
@@ -66,7 +66,7 @@ body>header #user ul {
     padding: 0;
     margin: 0;
     margin-left: -5em;
-    background-color: #fff;
+    background-color: #ffffff;
     border: 1px solid #99b;
 
     z-index: 1;
@@ -178,7 +178,7 @@ body>header #user:hover ul {
 }
 
 #wrapper.admin article {
-    border: 1px solid #ddd;
+    border: 1px solid #ffffff;
     border-radius: 1em;
     padding: 1em;
     margin: 1em;
