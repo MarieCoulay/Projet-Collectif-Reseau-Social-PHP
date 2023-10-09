@@ -28,17 +28,18 @@ include "session.php"
             ?>
             <img src="user.png" alt="Portrait de l'utilisatrice" />
             <section>
+                <!-- ici c'est authorId qui doit être affiché -->
                 <p>Sur cette page vous trouverez tous les message de l'utilisatrice : <?php echo $user['alias'] ?>
                     (n°<?php echo $userId ?>)
                 </p>
             </section>
-            <?php 
+            <?php
             $connectedUser = $_SESSION['connected_id'];
             $requestFollow = "INSERT INTO followers(id, followed_user_id, following_user_id) VALUES (NULL, '$userId', '$connectedUser');";
             $lesInformationsFollow = $mysqli->query($requestFollow);
             ?>
             <form method="post" action="wall.php?user_id=<?php echo $followerId ?>">
-                <button type=submit >S'abonner</button>
+                <button type=submit>S'abonner</button>
             </form>
         </aside>
         <main>
