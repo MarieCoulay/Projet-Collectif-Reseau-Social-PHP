@@ -49,16 +49,66 @@ include "session.php"
                     </p>
                 <?php } ?>
             </section>
+            <!-- S'ABONNER -->
             <?php
-            $requestFollow = "INSERT INTO followers(id, followed_user_id, following_user_id) VALUES (NULL,'$connectedUserId','$userId');";
-            $lesInformationsFollow = $mysqli->query($requestFollow);
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    // Récupérez l'ID de l'utilisateur à suivre depuis les données POST
+                    $userIdToFollow = $_POST["user_id_to_follow"];
+                    // var_dump($userIdToFollow);
+                    // Effectuez la requête SQL pour ajouter l'abonnement
+                    $requestFollow = "INSERT INTO followers (id, followed_user_id, following_user_id) VALUES (NULL, '$connectedUserId', '$userIdToFollow');";
+                    // Exécutez la requête SQL
+                    if ($mysqli->query($requestFollow)) {
+                        // L'abonnement a réussi, vous pouvez rediriger l'utilisateur vers une page de confirmation ou actualiser la page actuelle
+                        header("refresh: 0"); // Remplacez "confirmation.php" par la page de confirmation appropriée
+                        exit;
+                    } else {
+                        // Gérez les erreurs ou les échecs d'abonnement ici
+                        echo "Erreur lors de l'abonnement.";
+                    }
+                }
             ?>
-            <!-- A MODIFIER -->
             <form method="post" action="">
-                <button type=submit>S'abonner</button>
+                <input type="hidden" name="user_id_to_follow" value="<?php echo $userId?>">
+                <button type="submit">S'abonner</button>
             </form>
         </aside>
         <main>
+            <!-- Ajout d'un post sur le mur -->
+            <?php $enCoursDeTraitement = isset($connectedUserId);
+            if ($enCoursDeTraitement && isset($_POST['message']) && !empty($_POST['message'])) {
+                //echo "<pre>" . print_r($_POST, 1) . "</pre>";
+                //var_dump($_POST);
+                $postContent = $_POST['message'];
+                $postContent = $mysqli->real_escape_string($postContent);
+                header("refresh: 0");
+
+                $lInstructionSql = "INSERT INTO posts(id, user_id, content, created)
+            VALUES (NULL, $connectedUserId, '$postContent', NOW());";
+
+                $ok = $mysqli->query($lInstructionSql);
+                if (!$ok) {
+                    echo "Impossible d'ajouter le message: " . $mysqli->error;
+                } else {
+                    echo "Message posté";
+                }
+            }
+            ?>
+            <!-- Bloc d'input du post à ajouter -->
+            <?php if ($connectedUserId == $userId) {
+            ?>
+                <aside>
+                    <form action="wall.php?user_id=<?php echo $connectedUserId ?>" method="post">
+                        <dl>
+                            <dt><label for='message'><b>Postez un message: <b></label></dt>
+                            <dd><textarea name='message'></textarea></dd>
+                        </dl>
+                        <input type='submit'>
+                        <!-- onchange="location.reload()" -->
+                    </form>
+                </aside>
+            <?php } ?>
+
             <?php
             // génère le mur de l'utilisateur
             if ($connectedUserId != $userId) {
@@ -96,41 +146,6 @@ include "session.php"
             while ($post = $lesInformations->fetch_assoc()) {
             ?>
                 <?php include "article.php"; ?>
-            <?php } ?>
-
-            <!-- Ajout d'un post sur le mur -->
-            <?php $enCoursDeTraitement = isset($connectedUserId);
-            if ($enCoursDeTraitement && isset($_POST['message']) && !empty($_POST['message'])) {
-                //echo "<pre>" . print_r($_POST, 1) . "</pre>";
-                //var_dump($_POST);
-                $postContent = $_POST['message'];
-                $postContent = $mysqli->real_escape_string($postContent);
-                header("refresh: 0");
-
-                $lInstructionSql = "INSERT INTO posts(id, user_id, content, created)
-            VALUES (NULL, $connectedUserId, '$postContent', NOW());";
-
-                $ok = $mysqli->query($lInstructionSql);
-                if (!$ok) {
-                    echo "Impossible d'ajouter le message: " . $mysqli->error;
-                } else {
-                    echo "Message posté";
-                }
-            }
-            ?>
-            <!-- Bloc d'input du post à ajouter -->
-            <?php if ($connectedUserId == $userId) {
-            ?>
-                <aside>
-                    <form action="wall.php?user_id=<?php echo $connectedUserId ?>" method="post">
-                        <dl>
-                            <dt><label for='message'><b>Postez un message: <b></label></dt>
-                            <dd><textarea name='message'></textarea></dd>
-                        </dl>
-                        <input type='submit'>
-                        <!-- onchange="location.reload()" -->
-                    </form>
-                </aside>
             <?php } ?>
         </main>
     </div>
