@@ -22,9 +22,8 @@ include "session.php"
 
         <aside>
             <?php
-            var_dump($_GET);
-            // userId stocke l'id de l'utilisateur dont on visionne le mur WIP 
-            //echo $url;
+            // var_dump($_GET);
+            // userId stocke l'id de l'utilisateur dont on visionne le mur  
             $userId = $_GET['user_id'];
 
             if ($connectedUserId != $userId) {
@@ -55,7 +54,7 @@ include "session.php"
             $lesInformationsFollow = $mysqli->query($requestFollow);
             ?>
             <!-- A MODIFIER -->
-            <form method="post" action="wall.php?user_id=<?php echo $followerId ?>">
+            <form method="post" action="">
                 <button type=submit>S'abonner</button>
             </form>
         </aside>
@@ -100,15 +99,16 @@ include "session.php"
             <?php } ?>
 
             <!-- Ajout d'un post sur le mur -->
-            <?php $enCoursDeTraitement = isset($userId);
+            <?php $enCoursDeTraitement = isset($connectedUserId);
             if ($enCoursDeTraitement && isset($_POST['message']) && !empty($_POST['message'])) {
-                echo "<pre>" . print_r($_POST, 1) . "</pre>";
+                //echo "<pre>" . print_r($_POST, 1) . "</pre>";
+                //var_dump($_POST);
                 $postContent = $_POST['message'];
                 $postContent = $mysqli->real_escape_string($postContent);
                 header("refresh: 0");
 
                 $lInstructionSql = "INSERT INTO posts(id, user_id, content, created)
-            VALUES (NULL, $userId, '$postContent', NOW());";
+            VALUES (NULL, $connectedUserId, '$postContent', NOW());";
 
                 $ok = $mysqli->query($lInstructionSql);
                 if (!$ok) {
@@ -122,12 +122,13 @@ include "session.php"
             <?php if ($connectedUserId == $userId) {
             ?>
                 <aside>
-                    <form action="wall.php" method="post">
+                    <form action="wall.php?user_id=<?php echo $connectedUserId ?>" method="post">
                         <dl>
                             <dt><label for='message'><b>Postez un message: <b></label></dt>
                             <dd><textarea name='message'></textarea></dd>
                         </dl>
-                        <input type='submit' onchange="location.reload()">
+                        <input type='submit'>
+                        <!-- onchange="location.reload()" -->
                     </form>
                 </aside>
             <?php } ?>
