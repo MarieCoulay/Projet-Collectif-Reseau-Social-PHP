@@ -67,7 +67,10 @@ include "session.php"
                         $_SESSION['connected_id'] = $user['id'];
                     }
                 }
-
+                // Renvoie vers le feed si un user est connecté
+                if ($userId) {
+                    header("Location: feed.php");
+                }
                 ?>
                 <form action="login.php" method="post">
                     <input type='hidden' name='pseudo' value='achanger'>
