@@ -1,7 +1,7 @@
 <?php
 include "session.php"
 ?>
-<img src="resoc.jpg" alt="Logo de notre réseau social" />
+<img src="resoc.png" alt="Logo de notre réseau social" />
 <?php
 if (!$connectedUserId) {
 ?>
