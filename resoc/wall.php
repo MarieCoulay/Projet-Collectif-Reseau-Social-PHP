@@ -87,13 +87,15 @@ include "session.php"
             }
             ?>
             <!-- Bloc d'input du post à ajouter -->
-            <form action="wall.php" method="post">
-                <dl>
-                    <dt><label for='message'>Message</label></dt>
-                    <dd><textarea name='message'></textarea></dd>
-                </dl>
-                <input type='submit' onchange="location.reload()">
-            </form>
+            <aside>
+                <form action="wall.php" method="post">
+                    <dl>
+                        <dt><label for='message'><b>Postez un message:<b></label></dt>
+                        <dd><textarea name='message'></textarea></dd>
+                    </dl>
+                    <input type='submit' onchange="location.reload()">
+                </form>
+            </aside>
         </main>
     </div>
 </body>
