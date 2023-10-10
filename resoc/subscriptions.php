@@ -31,7 +31,7 @@ include "session.php"
         <main class='contacts'>
             <?php
             // Etape 1: récupérer l'id de l'utilisateur
-            $userId = intval($_GET['user_id']);
+            //$userId = intval($_GET['user_id']);
             // Etape 2: se connecter à la base de donnée
             include "connect_database.php";
             // Etape 3: récupérer le nom de l'utilisateur
@@ -39,7 +39,7 @@ include "session.php"
                     SELECT users.*
                     FROM followers 
                     LEFT JOIN users ON users.id=followers.followed_user_id 
-                    WHERE followers.following_user_id='$userId'
+                    WHERE followers.following_user_id='$connectedUserId'
                     GROUP BY users.id
                     ";
             include "query_database.php";

@@ -68,7 +68,7 @@ include "session.php"
                     }
                 }
                 // Renvoie vers le feed si un user est connecté
-                if ($userId) {
+                if ($connectedUserId) {
                     header("Location: feed.php");
                 }
                 ?>

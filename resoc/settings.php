@@ -39,7 +39,7 @@ include "session.php"
                     LEFT JOIN posts ON posts.user_id=users.id 
                     LEFT JOIN likes as given ON given.user_id=users.id 
                     LEFT JOIN likes as recieved ON recieved.post_id=posts.id 
-                    WHERE users.id = '$userId' 
+                    WHERE users.id = '$connectedUserId' 
                     GROUP BY users.id
                     ";
             include "query_database.php";

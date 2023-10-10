@@ -30,7 +30,7 @@ include "session.php"
             /**
              * Etape 3: récupérer le nom de l'utilisateur
              */
-            $laQuestionEnSql = "SELECT * FROM `users` WHERE id= '$userId' ";
+            $laQuestionEnSql = "SELECT * FROM `users` WHERE id= '$connectedUserId' ";
             include "query_database.php";
             $user = $lesInformations->fetch_assoc();
             // echo "<pre>" . print_r($user, 1) . "</pre>";
@@ -39,7 +39,7 @@ include "session.php"
             <section>
                 <p>Sur cette page vous trouverez tous les message des utilisatrices
                     auxquel est abonnée l'utilisatrice <?php echo $user['alias'] ?>
-                    (n° <?php echo $userId ?>)
+                    (n° <?php echo $connectedUserId ?>)
                 </p>
 
             </section>
