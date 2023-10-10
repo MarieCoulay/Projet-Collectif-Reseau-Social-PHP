@@ -14,10 +14,11 @@ a:hover {
 
 body>header {
     background-color: #ffffff;
+    border-radius: 1em;
     display: flex;
     width: 80em;
     margin: 0 auto 2em auto;
-    padding: 0;
+    padding: 1px;
 
 }
 
@@ -107,7 +108,7 @@ body>header #user:hover ul {
     flex: 3;
     padding-left: 1em;
     height: 80vh;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
 }
 
 #wrapper main article {
@@ -221,4 +222,8 @@ body>header #user:hover ul {
 
 pre {
     color: #aaa;
+}
+
+#posterMessage {
+    font-weight: bold;
 }

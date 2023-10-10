@@ -51,22 +51,20 @@ include "session.php"
             </section>
             <!-- S'ABONNER -->
             <?php
-                if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    // Récupérez l'ID de l'utilisateur à suivre depuis les données POST
-                    $userIdToFollow = $_POST["user_id_to_follow"];
-                    // var_dump($userIdToFollow);
-                    // Effectuez la requête SQL pour ajouter l'abonnement
-                    $requestFollow = "INSERT INTO followers (id, followed_user_id, following_user_id) VALUES (NULL, '$connectedUserId', '$userIdToFollow');";
-                    // Exécutez la requête SQL
-                    if ($mysqli->query($requestFollow)) {
-                        // L'abonnement a réussi, vous pouvez rediriger l'utilisateur vers une page de confirmation ou actualiser la page actuelle
-                        header("refresh: 0"); // Remplacez "confirmation.php" par la page de confirmation appropriée
-                        exit;
-                    } else {
-                        // Gérez les erreurs ou les échecs d'abonnement ici
-                        echo "Erreur lors de l'abonnement.";
+                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                        // Récupérez l'ID de l'utilisateur à suivre depuis les données POST
+                        $userIdToFollow = $_POST["user_id_to_follow"];
+                        // var_dump($userIdToFollow);
+                        // Effectuez la requête SQL pour ajouter l'abonnement
+                        $requestFollow = "INSERT INTO followers (followed_user_id, following_user_id) VALUES ('$userIdToFollow','$connectedUserId');";
+                        // Exécutez la requête SQL
+                        $ok = $mysqli->query($requestFollow);
+                        if (!$ok) {
+                            echo "Impossible de s'abonner " . $mysqli->error;
+                        } else {
+                            echo "Vous êtes abonné";
+                        }
                     }
-                }
             ?>
             <form method="post" action="">
                 <input type="hidden" name="user_id_to_follow" value="<?php echo $userId?>">
@@ -84,7 +82,7 @@ include "session.php"
                 header("refresh: 0");
 
                 $lInstructionSql = "INSERT INTO posts(id, user_id, content, created)
-            VALUES (NULL, $connectedUserId, '$postContent', NOW());";
+                VALUES (NULL, $connectedUserId, '$postContent', NOW());";
 
                 $ok = $mysqli->query($lInstructionSql);
                 if (!$ok) {
@@ -97,16 +95,16 @@ include "session.php"
             <!-- Bloc d'input du post à ajouter -->
             <?php if ($connectedUserId == $userId) {
             ?>
-                <aside>
+                <article>
                     <form action="wall.php?user_id=<?php echo $connectedUserId ?>" method="post">
                         <dl>
-                            <dt><label for='message'><b>Postez un message: <b></label></dt>
+                            <dt><label for='message' id="posterMessage">Postez un message:</label></dt>
                             <dd><textarea name='message'></textarea></dd>
                         </dl>
                         <input type='submit'>
                         <!-- onchange="location.reload()" -->
                     </form>
-                </aside>
+                </article>
             <?php } ?>
 
             <?php
