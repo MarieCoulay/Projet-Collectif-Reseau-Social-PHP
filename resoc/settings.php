@@ -63,7 +63,6 @@ include "session.php"
                     <dt>Nombre de "J'aime" reçus</dt>
                     <dd><?php echo $user['totalrecieved'] ?></dd>
                 </dl>
-
             </article>
 
             <?php

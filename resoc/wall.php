@@ -54,7 +54,6 @@ include "session.php"
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Récupérez l'ID de l'utilisateur à suivre depuis les données POST
                     $userIdToFollow = $_POST["user_id_to_follow"];
-
                     // Effectuez une requête SQL pour vérifier si l'utilisateur est déjà abonné
                     $checkFollowQuery = "SELECT * FROM followers WHERE followed_user_id = '$userIdToFollow' AND following_user_id = '$connectedUserId'";
                     $result = $mysqli->query($checkFollowQuery);
