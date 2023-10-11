@@ -1,6 +1,6 @@
 # projet-collectif-reseau-social-les-soleils-farfelus
 projet-collectif-reseau-social-les-soleils-farfelus created by GitHub Classroom
-Découverte du BackEnd sur un code pré-existant de Réseau social.
+Découverte du BackEnd sur un code pré-existant de Réseau social (désormais sur le thème des chiens)
 
 Durée du projet : 2 semaines (7 jours réels);
 Taille de l'équipe : 4 personnes (Pierre - Nathan - Romane - Marie);
