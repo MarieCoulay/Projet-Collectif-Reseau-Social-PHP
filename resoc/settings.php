@@ -65,6 +65,44 @@ include "session.php"
                 </dl>
 
             </article>
+
+            <?php
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                // Désactivez les contraintes de clé étrangère temporairement
+                $mysqli->query("SET foreign_key_checks = 0");
+
+                // Effectuez des requêtes SQL pour supprimer tous les éléments de l'utilisateur
+                $deleteFollowersQuery = "DELETE FROM followers WHERE follower_user_id = '$connectedUserId'";
+                $deleteLikesQuery = "DELETE FROM likes WHERE user_id = '$connectedUserId'";
+                $deleteUserPostsQuery = "DELETE FROM posts WHERE user_id = '$connectedUserId'";
+                $deleteUserQuery = "DELETE FROM users WHERE id = '$connectedUserId'";
+
+                // Exécutez les requêtes dans l'ordre inverse de la dépendance
+                $okFollowers = $mysqli->query($deleteFollowersQuery);
+                $okLikes = $mysqli->query($deleteLikesQuery);
+                $okUserPosts = $mysqli->query($deleteUserPostsQuery);
+                $okUser = $mysqli->query($deleteUserQuery);
+
+                // Réactivez les contraintes de clé étrangère
+                $mysqli->query("SET foreign_key_checks = 1");
+
+                header("Location: logout.php");
+
+                // Vérifiez si toutes les requêtes ont réussi
+                if ($okFollowers && $okLikes && $okUserPosts && $okUser) {
+                    echo "Ce compte a été supprimé avec succès";
+                } else {
+                    echo "Impossible de supprimer le compte : " . $mysqli->error;
+                }
+            }
+            ?>
+            <form method="post" action="">
+                <input type="hidden" name="connectedUserId" value="<?php echo $connectedUserId ?>">
+                <button type="submit">Supprimer son compte</button>
+            </form>
+
+
+
         </main>
     </div>
 </body>

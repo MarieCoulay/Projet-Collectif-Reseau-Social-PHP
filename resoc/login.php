@@ -86,7 +86,6 @@ include "session.php"
                     Pas de compte?
                     <a href='registration.php'>Inscrivez-vous.</a>
                 </p>
-
             </article>
         </main>
     </div>
