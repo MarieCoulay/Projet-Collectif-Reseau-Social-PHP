@@ -51,7 +51,7 @@ include "session.php"
                 // echo "<pre>" . print_r($userId, 1) . "</pre>";
             ?>
                 <article>
-                    <img src="user.jpg" alt="blason" />
+                    <img src="user.png" alt="blason" />
                     <h3><a href="wall.php?user_id=<?php echo $userId['id'] ?>"><?php echo $userId['alias'] ?></a></h3>
                     <p>id:<?php echo $userId['id'] ?></p>
                 </article>
