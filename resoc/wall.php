@@ -51,25 +51,48 @@ include "session.php"
             </section>
             <!-- S'ABONNER -->
             <?php
-                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                        // Récupérez l'ID de l'utilisateur à suivre depuis les données POST
-                        $userIdToFollow = $_POST["user_id_to_follow"];
-                        // var_dump($userIdToFollow);
-                        // Effectuez la requête SQL pour ajouter l'abonnement
-                        $requestFollow = "INSERT INTO followers (followed_user_id, following_user_id) VALUES ('$userIdToFollow','$connectedUserId');";
-                        // Exécutez la requête SQL
-                        $ok = $mysqli->query($requestFollow);
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    // Récupérez l'ID de l'utilisateur à suivre depuis les données POST
+                    $userIdToFollow = $_POST["user_id_to_follow"];
+
+                    // Effectuez une requête SQL pour vérifier si l'utilisateur est déjà abonné
+                    $checkFollowQuery = "SELECT * FROM followers WHERE followed_user_id = '$userIdToFollow' AND following_user_id = '$connectedUserId'";
+                    $result = $mysqli->query($checkFollowQuery);
+
+                    if ($result->num_rows > 0) {
+                        // L'utilisateur est déjà abonné, effectuez la requête pour le désabonner
+                        $requestUnfollow = "DELETE FROM followers WHERE followed_user_id = '$userIdToFollow' AND following_user_id = '$connectedUserId';";
+                        $ok = $mysqli->query($requestUnfollow);
+
                         if (!$ok) {
-                            echo "Impossible de s'abonner " . $mysqli->error;
+                            echo "Impossible de se désabonner : " . $mysqli->error;
+                        } else {
+                            echo "Vous êtes désabonné";
+                        }
+                    } else {
+                        // L'utilisateur n'est pas abonné, effectuez la requête pour l'abonner
+                        $requestFollow = "INSERT INTO followers (followed_user_id, following_user_id) VALUES ('$userIdToFollow','$connectedUserId');";
+                        $ok = $mysqli->query($requestFollow);
+
+                        if (!$ok) {
+                            echo "Impossible de s'abonner : " . $mysqli->error;
                         } else {
                             echo "Vous êtes abonné";
                         }
                     }
-            ?>
-            <form method="post" action="">
-                <input type="hidden" name="user_id_to_follow" value="<?php echo $userId?>">
-                <button type="submit">S'abonner</button>
-            </form>
+                }
+
+                // Déterminer le texte du bouton en fonction de l'état d'abonnement
+                $checkFollowQuery = "SELECT * FROM followers WHERE followed_user_id = '$userId' AND following_user_id = '$connectedUserId'";
+                $result = $mysqli->query($checkFollowQuery);
+                $buttonText = ($result->num_rows > 0) ? "Se désabonner" : "S'abonner";
+                ?>
+
+                <form method="post" action="">
+                    <input type="hidden" name="user_id_to_follow" value="<?php echo $userId ?>">
+                    <button type="submit"><?php echo $buttonText; ?></button>
+                </form>
+
         </aside>
         <main>
             <!-- Ajout d'un post sur le mur -->
