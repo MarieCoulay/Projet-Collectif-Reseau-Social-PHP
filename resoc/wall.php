@@ -123,7 +123,7 @@ include "session.php"
                             <dt><label for='message' id="posterMessage">Postez un message:</label></dt>
                             <dd><textarea name='message'></textarea></dd>
                         </dl>
-                        <input type='submit'>
+                        <button type='submit'>Poster</button>
                         <!-- onchange="location.reload()" -->
                     </form>
                 </article>

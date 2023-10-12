@@ -37,11 +37,11 @@ body>header #menu a {
     flex: 1;
     text-align: center;
     padding-top: 2em;
-    border-right: 1px solid #99b;
+    border-right: 1px solid rgb(236, 185, 211);
 }
 
 body>header a:hover {
-    background-color: #99b;
+    background-color: rgb(255, 230, 239);
 }
 
 body>header ul {
@@ -146,6 +146,7 @@ body>header #user:hover ul {
 
 #wrapper main article footer small {
     float: left;
+    margin-top: 15px;
 }
 
 #wrapper.admin {
@@ -226,4 +227,22 @@ pre {
 
 #posterMessage {
     font-weight: bold;
+}
+#like_image {
+    height: 25px;
+    width: 25px;
+}
+
+button {
+    margin-left: 10px;
+    border-radius: 3px;
+    border-width: 1px;
+    border-color: rgb(236, 185, 211);
+    color: rgb(95, 27, 61);
+    padding: 5px
+}
+
+button:hover {
+    cursor: pointer;
+    background-color:rgb(255, 216, 236);
 }
